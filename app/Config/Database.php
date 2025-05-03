@@ -1,5 +1,3 @@
-<?php
-
 namespace Config;
 
 use CodeIgniter\Database\Config;
@@ -26,16 +24,14 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'db',
+        'hostname' => 'db',   // Docker service name for the MySQL container
         'username' => 'root',
-        'password' => 'root',         // ← FIXED HERE
+        'password' => '',     // Empty password
         'database' => 'my_api_db',
         'DBDriver' => 'MySQLi',
         'charset'  => 'utf8mb4',
         'DBCollat' => 'utf8mb4_general_ci',
     ];
-
-    
 
     /**
      * Database connection settings for PHPUnit tests.
@@ -57,7 +53,7 @@ class Database extends Config
         'compress'    => false,
         'strictOn'    => false,
         'failover'    => [],
-        'port'        => 3306,  // Port for SQLite is irrelevant
+        'port'        => 3306,
         'foreignKeys' => true,
         'busyTimeout' => 1000,
         'dateFormat'  => [
