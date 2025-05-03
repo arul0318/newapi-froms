@@ -5,27 +5,30 @@ services:
     image: mysql:5.7
     container_name: my-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
-      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: my-secret-pw   # Root password for MySQL
+      MYSQL_DATABASE: mydb                # Default database
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
       - mynetwork
+    ports:
+      - "3306:3306"  # Expose MySQL port so other containers and tools can connect
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: my-phpmyadmin
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: mysql                      # MySQL service name (container name) in Docker Compose
+      MYSQL_ROOT_PASSWORD: my-secret-pw     # Same root password as in MySQL container
     ports:
-      - "8080:80"
+      - "8080:80"                           # Expose phpMyAdmin on port 8080
     depends_on:
-      - mysql
+      - mysql                               # Ensure MySQL starts before phpMyAdmin
     networks:
       - mynetwork
 
 volumes:
-  mysql_data:
+  mysql_data:  # This volume will persist MySQL data
 
 networks:
-  mynetwork:
+  mynetwork:  # Define a custom network for both containers to communicate

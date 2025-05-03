@@ -24,13 +24,14 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'mysql',   // Docker service name for MySQL container
-        'username' => 'root',    // Username from Docker Compose
-        'password' => 'my-secret-pw',     // Password from Docker Compose
-        'database' => 'mydb',    // Database name from Docker Compose
+        'hostname' => 'mysql',    // Docker service name for MySQL container
+        'username' => 'root',     // Username from Docker Compose
+        'password' => 'my-secret-pw',  // Password from Docker Compose
+        'database' => 'mydb',     // Database name from Docker Compose
         'DBDriver' => 'MySQLi',
         'charset'  => 'utf8mb4',
         'DBCollat' => 'utf8mb4_general_ci',
+        'port'     => 3306,       // Ensure the port is explicitly set
     ];
 
     /**
