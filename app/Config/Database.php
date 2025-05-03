@@ -26,14 +26,15 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'db', // this is correct for Docker
+        'hostname' => 'db',
         'username' => 'root',
-        'password' => '',
+        'password' => 'root',         // ← FIXED HERE
         'database' => 'my_api_db',
         'DBDriver' => 'MySQLi',
         'charset'  => 'utf8mb4',
         'DBCollat' => 'utf8mb4_general_ci',
     ];
+
     
 
     /**
