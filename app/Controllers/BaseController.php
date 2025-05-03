@@ -22,12 +22,6 @@ abstract class BaseController extends Controller
 
         // Establishing the database connection
         $this->db = \Config\Database::connect();
-        
-        // Make sure the connection is valid
-        if (!$this->db->connID) {
-            throw new \RuntimeException('Unable to connect to the database.');
-        }
-
         // Access the 'users' table dynamically via the DB connection
         $this->users = $this->db->table('users');
     }
