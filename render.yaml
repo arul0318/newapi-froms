@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: newapi-froms
+    env: php
+    plan: free
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php spark cache:clear
+      php spark clear-compiled
+    startCommand: php spark serve --host=0.0.0.0 --port=$PORT --document-root public
+    envVars:
+      - key: CI_ENVIRONMENT
+        value: production
+      - key: APP_BASE_URL
+        value: https://newapi-froms.onrender.com/
