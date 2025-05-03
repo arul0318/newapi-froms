@@ -22,13 +22,6 @@ abstract class BaseController extends Controller
         $this->db = \Config\Database::connect();
 
         // Check if the connection is successful
-        if ($this->db->connID === false) {
-            log_message('error', 'Database connection failed!');
-        } else {
-            log_message('info', 'Database connection successful');
-            
-            // Accessing the 'users' table dynamically via the DB connection
-            $this->users = $this->db->table('users');
-        }
+        $this->users = $this->db->table('users');
     }
 }
