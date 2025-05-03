@@ -1,11 +1,10 @@
-<?php
-
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use CodeIgniter\Database\Database;
 
 abstract class BaseController extends Controller
 {
@@ -19,14 +18,10 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        // Connect to the database
+        // Establishing the database connection
         $this->db = \Config\Database::connect();
 
-        // Optional: Only assign if table exists to prevent error
-        if ($this->db->tableExists('users')) {
-            $this->users = $this->db->table('users');
-        } else {
-            log_message('error', 'Table "users" does not exist.');
-        }
+        // Check if the connection is successful
+        $this->users = $this->db->table('users');
     }
 }
