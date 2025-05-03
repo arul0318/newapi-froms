@@ -15,37 +15,36 @@ class Database extends Config
     public string $filesPath = APPPATH . 'Database' . DIRECTORY_SEPARATOR;
 
     /**
-     * Lets you choose which connection group to use if no other is specified.
+     * Default connection group.
      */
     public string $defaultGroup = 'default';
 
     /**
-     * The default database connection.
+     * Default database connection settings.
      *
      * @var array<string, mixed>
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'my_api_db',
-        'DBDriver' => 'MySQLi',
-        'charset'  => 'utf8mb4', // utf8mb4 for full Unicode support
-        'DBCollat' => 'utf8mb4_general_ci',
+        'hostname' => 'db-container-name',  // Update this if using Docker (use the DB container name)
+        'username' => 'root',               // Database username
+        'password' => '',                   // Database password (empty if no password)
+        'database' => 'my_api_db',          // Database name
+        'DBDriver' => 'MySQLi',             // MySQL driver
+        'charset'  => 'utf8mb4',            // UTF-8 encoding for full Unicode support
+        'DBCollat' => 'utf8mb4_general_ci', // Collation (supports more characters)
+        'port'     => 3306,                 // MySQL port (default is 3306)
     ];
 
     /**
-     * This database connection is used when running PHPUnit database tests.
-     *
-     * @var array<string, mixed>
+     * Database connection settings for PHPUnit tests.
      */
     public array $tests = [
         'DSN'         => '',
-        'hostname'    => '127.0.0.1',
-        'username'    => '',
-        'password'    => '',
-        'database'    => ':memory:',
+        'hostname'    => '127.0.0.1', // Localhost for SQLite tests
+        'username'    => '',          // No user for SQLite
+        'password'    => '',          // No password for SQLite
+        'database'    => ':memory:',  // In-memory SQLite database for tests
         'DBDriver'    => 'SQLite3',
         'DBPrefix'    => 'db_',
         'pConnect'    => false,
@@ -57,7 +56,7 @@ class Database extends Config
         'compress'    => false,
         'strictOn'    => false,
         'failover'    => [],
-        'port'        => 3306,
+        'port'        => 3306,  // Port for SQLite is irrelevant
         'foreignKeys' => true,
         'busyTimeout' => 1000,
         'dateFormat'  => [
@@ -67,13 +66,15 @@ class Database extends Config
         ],
     ];
 
+    /**
+     * Constructor
+     * Ensures the correct database group is set when running tests.
+     */
     public function __construct()
     {
         parent::__construct();
 
-        // Ensure that we always set the database group to 'tests' if
-        // we are currently running an automated test suite, so that
-        // we don't overwrite live data on accident.
+        // Automatically switch to the 'tests' connection group when running automated tests
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
