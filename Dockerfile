@@ -10,12 +10,12 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zlib1g-dev \
     libzip-dev \
-    libicu-dev \  # Required for intl extension
+    libicu-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql mysqli zip \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
-    && docker-php-ext-install intl \  # Install the intl extension
+    && docker-php-ext-install intl \
     && apt-get clean
 
 # Enable Apache mod_rewrite for clean URLs
