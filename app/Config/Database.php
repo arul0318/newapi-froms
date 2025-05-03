@@ -26,7 +26,7 @@ class Database extends Config
         'DSN'      => '',
         'hostname' => 'db',   // Docker service name for the MySQL container
         'username' => 'root',
-        'password' => '',     // Empty password
+        'password' => 'root',     // Empty password
         'database' => 'my_api_db',
         'DBDriver' => 'MySQLi',
         'charset'  => 'utf8mb4',
