@@ -26,15 +26,15 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'db-container-name',  // Update this if using Docker (use the DB container name)
-        'username' => 'root',               // Database username
-        'password' => '',                   // Database password (empty if no password)
-        'database' => 'my_api_db',          // Database name
-        'DBDriver' => 'MySQLi',             // MySQL driver
-        'charset'  => 'utf8mb4',            // UTF-8 encoding for full Unicode support
-        'DBCollat' => 'utf8mb4_general_ci', // Collation (supports more characters)
-        'port'     => 3306,                 // MySQL port (default is 3306)
+        'hostname' => 'db', // this is correct for Docker
+        'username' => 'root',
+        'password' => '',
+        'database' => 'my_api_db',
+        'DBDriver' => 'MySQLi',
+        'charset'  => 'utf8mb4',
+        'DBCollat' => 'utf8mb4_general_ci',
     ];
+    
 
     /**
      * Database connection settings for PHPUnit tests.
